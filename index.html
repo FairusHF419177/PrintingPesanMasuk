@@ -5,36 +5,138 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Input Barang Printing</title>
+
 <style>
-:root{--ac:#2563eb;--bd:#cbd5e1;--tx:#0f172a;--mu:#475569}
+:root{
+--ac:#2563eb;
+--bd:#cbd5e1;
+--tx:#0f172a;
+--mu:#475569;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,sans-serif;background:#f1f5f9;color:var(--tx)}
+body{
+margin:0;
+font-family:system-ui,sans-serif;
+background:#f1f5f9;
+color:var(--tx);
+}
 .w{max-width:560px;margin:0 auto;padding:14px}
 h1{font-size:19px;margin:6px 0 12px}
+.status{
+padding:12px;
+border-radius:9px;
+margin-bottom:12px;
+font-size:13px;
+font-weight:700;
+background:#fef3c7;
+color:#92400e;
+}
 .tabs{display:flex;gap:8px;margin-bottom:12px}
-.tabs button{flex:1;padding:12px;border:2px solid var(--bd);background:#fff;border-radius:10px;font-weight:700;font-size:15px;color:var(--mu)}
-.tabs button.on{border-color:var(--ac);background:var(--ac);color:#fff}
-.card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
-label{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:0 0 4px;text-transform:uppercase}
-input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-size:16px;min-height:44px;color:var(--tx);background:#fff}
-.g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.row{display:grid;grid-template-columns:1fr 90px 44px;gap:8px;margin-bottom:8px}
-.x{border:0;background:#fee2e2;color:#b91c1c;font-size:22px;border-radius:8px;height:44px}
-.add{width:100%;padding:12px;border:2px dashed var(--ac);background:#eff6ff;color:var(--ac);font-weight:700;border-radius:10px;font-size:15px}
-.send{width:100%;padding:15px;border:0;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:16px}
+.tabs button{
+flex:1;
+padding:12px;
+border:2px solid var(--bd);
+background:#fff;
+border-radius:10px;
+font-weight:700;
+font-size:15px;
+color:var(--mu);
+}
+.tabs button.on{
+border-color:var(--ac);
+background:var(--ac);
+color:#fff;
+}
+.card{
+background:#fff;
+border:1px solid var(--bd);
+border-radius:12px;
+padding:14px;
+margin-bottom:12px;
+}
+label{
+display:block;
+font-size:12px;
+font-weight:700;
+color:var(--mu);
+margin:0 0 4px;
+text-transform:uppercase;
+}
+input{
+width:100%;
+padding:10px;
+border:1px solid var(--bd);
+border-radius:8px;
+font-size:16px;
+min-height:44px;
+color:var(--tx);
+background:#fff;
+}
+.g{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+.row{
+display:grid;
+grid-template-columns:1fr 90px 44px;
+gap:8px;
+margin-bottom:8px;
+}
+.x{
+border:0;
+background:#fee2e2;
+color:#b91c1c;
+font-size:22px;
+border-radius:8px;
+height:44px;
+}
+.add{
+width:100%;
+padding:12px;
+border:2px dashed var(--ac);
+background:#eff6ff;
+color:var(--ac);
+font-weight:700;
+border-radius:10px;
+font-size:15px;
+}
+.send{
+width:100%;
+padding:15px;
+border:0;
+border-radius:12px;
+background:#16a34a;
+color:#fff;
+font-weight:800;
+font-size:16px;
+}
 .send:disabled{opacity:.5}
-#msg{margin:0 0 10px;padding:10px;border-radius:8px;font-size:14px;display:none}
+#msg{
+margin:0 0 10px;
+padding:12px;
+border-radius:8px;
+font-size:14px;
+display:none;
+}
 .ok{background:#dcfce7;color:#14532d}
 .er{background:#fee2e2;color:#7f1d1d}
+.info{background:#dbeafe;color:#1e40af}
 </style>
 </head>
+
 <body>
 <div class="w">
+
 <h1>📦 Input Barang Printing</h1>
 
+<div id="connectionStatus" class="status">
+⏳ Menghubungkan ke Google Spreadsheet...
+</div>
+
 <div class="tabs">
-<button id="tM" class="on">Barang Masuk</button>
-<button id="tP">Pemesanan</button>
+<button id="tM" class="on" type="button">Barang Masuk</button>
+<button id="tP" type="button">Pemesanan</button>
 </div>
 
 <div class="card">
@@ -43,11 +145,13 @@ input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-
 <label>Tanggal</label>
 <input type="date" id="tgl">
 </div>
+
 <div id="jamBox">
 <label>Jam</label>
 <input type="time" id="jam">
 </div>
 </div>
+
 <div style="margin-top:10px">
 <label id="lN">Penerima</label>
 <input id="nama" placeholder="Nama">
@@ -57,162 +161,383 @@ input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-
 <div class="card">
 <label>Daftar item (1 item = 1 baris di sheet)</label>
 <div id="items"></div>
-<button class="add" id="add" type="button">+ Tambah Item</button>
+<button class="add" id="add" type="button">
++ Tambah Item
+</button>
 </div>
 
 <div id="msg"></div>
-<button class="send" id="send">Kirim</button>
+
+<button class="send" id="send" type="button">
+Kirim
+</button>
+
 <datalist id="dl"></datalist>
+
 </div>
 
 <script>
-// URL GOOGLE APPS SCRIPT OTOMATIS
-var SCRIPT_URL="https://script.google.com/macros/s/AKfycbwBy_yU86b8_lRMErCwsaRmErRkl1bsOWDegmXrJIbXgUFMz0Il1chJZid6-OYxLQTJDw/exec";
 
-var type="MASUK",rid=newId();
+// =================================
+// KONFIGURASI GOOGLE APPS SCRIPT
+// =================================
 
-var $=function(i){
-return document.getElementById(i);
+var SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwBy_yU86b8_lRMErCwsaRmErRkl1bsOWDegmXrJIbXgUFMz0Il1chJZid6-OYxLQTJDw/exec";
+
+var type = "MASUK";
+var rid = newId();
+
+var $ = function(id){
+return document.getElementById(id);
 };
+
+// =================================
+// ID UNIK
+// =================================
 
 function newId(){
 return Date.now()+"-"+Math.random().toString(36).slice(2);
 }
 
+// =================================
+// TANGGAL DAN JAM WIB
+// =================================
+
 function wib(){
-var d=new Date(Date.now()+7*36e5);
-var p=function(n){return String(n).padStart(2,"0")};
-return{
+var d = new Date(Date.now()+7*36e5);
+
+var p = function(n){
+return String(n).padStart(2,"0");
+};
+
+return {
 d:d.getUTCFullYear()+"-"+p(d.getUTCMonth()+1)+"-"+p(d.getUTCDate()),
 t:p(d.getUTCHours())+":"+p(d.getUTCMinutes())
 };
 }
 
+// =================================
+// JSONP REQUEST
+// =================================
+
+function jsonp(params){
+
+return new Promise(function(resolve,reject){
+
+var callbackName =
+"callback_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+
+var script = document.createElement("script");
+var finished = false;
+
+var timer = setTimeout(function(){
+finish(new Error("Waktu koneksi habis."));
+},20000);
+
+function finish(error,result){
+
+if(finished)return;
+finished=true;
+
+clearTimeout(timer);
+delete window[callbackName];
+
+if(script.parentNode){
+script.parentNode.removeChild(script);
+}
+
+if(error)reject(error);
+else resolve(result);
+}
+
+window[callbackName] = function(result){
+finish(null,result);
+};
+
+params.callback = callbackName;
+
+var query = Object.keys(params).map(function(key){
+return encodeURIComponent(key)+"="+
+encodeURIComponent(params[key]);
+}).join("&");
+
+script.src = SCRIPT_URL+"?"+query;
+
+script.onerror = function(){
+finish(new Error("Tidak dapat menghubungi Spreadsheet."));
+};
+
+document.body.appendChild(script);
+
+});
+
+}
+
+// =================================
+// STATUS KONEKSI
+// =================================
+
+function connectionStatus(message,success){
+
+var e = $("connectionStatus");
+
+e.textContent = message;
+
+if(success){
+e.style.background="#dcfce7";
+e.style.color="#14532d";
+}else{
+e.style.background="#fee2e2";
+e.style.color="#991b1b";
+}
+}
+
+// =================================
+// NOTIFIKASI
+// =================================
+
+function show(message,cls){
+
+var e = $("msg");
+
+e.textContent = message;
+e.className=cls;
+e.style.display="block";
+
+}
+
+// =================================
+// TAMBAH BARIS ITEM
+// =================================
+
 function addRow(){
-var r=document.createElement("div");
+
+var r = document.createElement("div");
 r.className="row";
 
-r.innerHTML='<input class="it" list="dl" placeholder="Nama item"><input class="q" type="number" inputmode="decimal" min="0" step="any" placeholder="Qty"><button type="button" class="x">×</button>';
+r.innerHTML =
+'<input class="it" list="dl" placeholder="Nama item">'+
+'<input class="q" type="number" inputmode="decimal" min="0" step="any" placeholder="Qty">'+
+'<button type="button" class="x">×</button>';
 
 r.querySelector(".x").onclick=function(){
+
 if($("items").children.length>1){
 r.remove();
 }else{
 r.querySelector(".it").value="";
 r.querySelector(".q").value="";
 }
+
 };
 
 $("items").appendChild(r);
+
 return r;
 }
 
+// =================================
+// PILIH JENIS TRANSAKSI
+// =================================
+
 function setType(t){
+
 type=t;
+
 $("tM").className=t=="MASUK"?"on":"";
 $("tP").className=t=="PESAN"?"on":"";
-$("jamBox").style.display=t=="MASUK"?"":"none";
-$("lN").textContent=t=="MASUK"?"Penerima":"Pemesan";
+
+$("jamBox").style.display=
+t=="MASUK"?"":"none";
+
+$("lN").textContent=
+t=="MASUK"?"Penerima":"Pemesan";
+
+show("Jenis transaksi: "+(t=="MASUK"?"Barang Masuk":"Pemesanan"),"info");
+
 }
 
-function show(m,c){
-var e=$("msg");
-e.textContent=m;
-e.className=c;
-e.style.display="block";
-}
+$("tM").onclick=function(){
+setType("MASUK");
+};
 
-function loadItems(u){
-if(!u)return;
-
-fetch(u+"?action=items")
-.then(function(r){return r.json()})
-.then(function(j){
-$("dl").innerHTML=(j.items||[]).map(function(i){
-return '<option value="'+i.replace(/"/g,"&quot;")+'">';
-}).join("");
-})
-.catch(function(){
-console.log("Gagal memuat daftar item.");
-});
-}
-
-$("tM").onclick=function(){setType("MASUK")};
-$("tP").onclick=function(){setType("PESAN")};
+$("tP").onclick=function(){
+setType("PESAN");
+};
 
 $("add").onclick=function(){
 addRow().querySelector(".it").focus();
 };
 
+// =================================
+// MEMUAT DAFTAR ITEM
+// =================================
+
+async function loadItems(){
+
+connectionStatus(
+"⏳ Sedang menghubungkan ke Spreadsheet...",false
+);
+
+try{
+
+var result=await jsonp({
+action:"items"
+});
+
+if(!result.ok){
+throw new Error(result.error||"Koneksi gagal");
+}
+
+$("dl").innerHTML=(result.items||[]).map(function(i){
+
+var option=document.createElement("option");
+option.value=i;
+
+return option.outerHTML;
+
+}).join("");
+
+connectionStatus(
+"🟢 TERHUBUNG — Google Spreadsheet siap digunakan",
+true
+);
+
+return true;
+
+}catch(e){
+
+connectionStatus(
+"🔴 KONEKSI GAGAL — "+e.message,
+false
+);
+
+return false;
+
+}
+
+}
+
+// =================================
+// KIRIM DATA
+// =================================
+
 $("send").onclick=async function(){
 
-var url=SCRIPT_URL;
-
-if(!url){
-return show("URL Web App belum tersedia.","er");
-}
+var b=$("send");
 
 if(!$("nama").value.trim()){
-return show("Nama wajib diisi.","er");
+show("Nama wajib diisi.","er");
+return;
 }
 
-var items=[].map.call($("items").children,function(r){
-return{
+var items=[].map.call(
+$("items").children,
+function(r){
+
+return {
 item:r.querySelector(".it").value.trim(),
 qty:parseFloat(r.querySelector(".q").value)
 };
-}).filter(function(x){
-return x.item||x.qty;
+
+}
+).filter(function(x){
+return x.item||!isNaN(x.qty);
 });
 
-if(!items.length||items.some(function(x){
-return !x.item||!(x.qty>0);
+if(!items.length || items.some(function(x){
+return !x.item || !(x.qty>0);
 })){
-return show("Setiap item harus punya nama dan qty lebih dari 0.","er");
+
+show(
+"Setiap item harus mempunyai nama dan qty lebih dari 0.",
+"er"
+);
+
+return;
 }
 
-var b=$("send");
+if(items.length>100){
+show("Maksimal 100 item dalam satu pengiriman.","er");
+return;
+}
+
 b.disabled=true;
 b.textContent="Mengirim...";
 
+show("⏳ Sedang menyimpan data ke Spreadsheet...","info");
+
 try{
-await fetch(url,{
-method:"POST",
-mode:"no-cors",
-headers:{"Content-Type":"text/plain;charset=utf-8"},
-body:JSON.stringify({
+
+var payload={
+
+action:"submit",
+
+data:JSON.stringify({
+
 type:type,
 tanggal:$("tgl").value,
 jam:$("jam").value,
-nama:$("nama").value,
+nama:$("nama").value.trim(),
 items:items,
 requestId:rid
-})
-});
 
-show("Permintaan pengiriman telah dikirim: "+items.length+" item ke sheet "+type+".","ok");
+})
+
+};
+
+var result=await jsonp(payload);
+
+if(!result.ok){
+
+throw new Error(result.error||"Penyimpanan gagal");
+
+}
+
+// KONFIRMASI DARI APPS SCRIPT
+
+show(
+"✅ DATA BERHASIL TERKIRIM! "+
+result.rows+" baris berhasil disimpan ke sheet "+type+".",
+"ok"
+);
+
+// KOSONGKAN FORM
 
 $("items").innerHTML="";
 addRow();
+
 rid=newId();
-loadItems(url);
+
+await loadItems();
 
 }catch(e){
-show("Gagal mengirim (cek koneksi). Silakan coba lagi.","er");
+
+show(
+"❌ DATA GAGAL DIKIRIM: "+e.message,
+"er"
+);
+
 }
 
 b.disabled=false;
 b.textContent="Kirim";
+
 };
 
+// =================================
+// INISIALISASI
+// =================================
+
 var n=wib();
+
 $("tgl").value=n.d;
 $("jam").value=n.t;
 
 addRow();
 
-// OTOMATIS MEMUAT DAFTAR ITEM
-loadItems(SCRIPT_URL);
+loadItems();
 
 </script>
 </body>
