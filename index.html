@@ -23,7 +23,7 @@ input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-
 </style></head><body><div class="w">
 <h1>📦 Input Barang Printing</h1>
 <div id="cfg" class="card" style="display:none"><label>URL Web App Apps Script</label>
-<input id="url" placeholder=https://script.google.com/macros/s/AKfycbwBy_yU86b8_lRMErCwsaRmErRkl1bsOWDegmXrJIbXgUFMz0Il1chJZid6-OYxLQTJDw/exec></div>
+<input id="url" placeholder="https://script.google.com/macros/s/AKfycbwBy_yU86b8_lRMErCwsaRmErRkl1bsOWDegmXrJIbXgUFMz0Il1chJZid6-OYxLQTJDw/exec"></div>
 <div class="tabs"><button id="tM" class="on">Barang Masuk</button><button id="tP">Pemesanan</button></div>
 <div class="card"><div class="g"><div><label>Tanggal</label><input type="date" id="tgl"></div>
 <div id="jamBox"><label>Jam</label><input type="time" id="jam"></div></div>
@@ -33,7 +33,7 @@ input{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;font-
 <div id="msg"></div><button class="send" id="send">Kirim</button>
 <datalist id="dl"></datalist></div>
 <script>
-var SCRIPT_URL="PASTE_URL_WEB_APP_DI_SINI",type="MASUK",rid=newId();
+var SCRIPT_URL="https://script.google.com/macros/s/AKfycbwBy_yU86b8_lRMErCwsaRmErRkl1bsOWDegmXrJIbXgUFMz0Il1chJZid6-OYxLQTJDw/exec",type="MASUK",rid=newId();
 var $=function(i){return document.getElementById(i)};
 function newId(){return Date.now()+"-"+Math.random().toString(36).slice(2)}
 function wib(){var d=new Date(Date.now()+7*36e5),p=function(n){return String(n).padStart(2,"0")};
